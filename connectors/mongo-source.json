@@ -1,0 +1,18 @@
+{
+    "name": "atlas-prod",
+    "config": {
+        "connector.class" : "io.debezium.connector.mongodb.MongoDbConnector",
+        "tasks.max" : "1",
+        "mongodb.hosts" : "rs0/api.atlas-prod.makeandship.com:27017",
+        "mongodb.name" : "atlas-prod",
+        "mongodb.user" : "<MONGO_USER>",
+        "mongodb.password" : "<MONGO_PASSWORD>",
+        "database.whitelist" : "atlas",
+        "database.history.kafka.bootstrap.servers" : "kafka:9092",
+        "transforms": "route",
+        "transforms.route.type" : "org.apache.kafka.connect.transforms.RegexRouter",
+        "transforms.route.regex" : "([^.]+)\\.([^.]+)\\.([^.]+)",
+        "transforms.route.replacement" : "$3",
+        "mongodb.members.auto.discover": "false"
+    }
+}
