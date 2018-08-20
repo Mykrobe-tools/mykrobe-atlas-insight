@@ -1,0 +1,18 @@
+atlas_experiments_consumer:
+  build: ./consumer/
+  container_name: atlas_experiments_consumer
+  external_links:
+    - zookeeper
+    - kafka
+  environment:
+    - TOPIC=experiments
+    - GROUP_ID=atlas-prod-incidents
+    - MYSQL_HOST=api.atlas-prod.makeandship.com
+    - MYSQL_USER=root
+    - MYSQL_PASSWORD=5HKCO4SDkTfy
+    - MYSQL_DATABASE=atlas
+    - MYSQL_PORT=3306
+    - MYSQL_TABLE_NAME=experiments
+    - BLACKLIST_FIELDS=__v,geoDistance_experiments,metadata_geoDistance_experiments,probeSets,file,results,externalId
+    - ARRAYS_MAPPING=results:results
+    - EPOCH_TO_DATE_FIEDLS=created_date,modified_date,received_date
